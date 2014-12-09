@@ -1,0 +1,23 @@
+{
+  "name": "node-cache",
+  "version": "1.0.0",
+  "description": "a super simple in server cache for things in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.ldschurch.org/stash/scm/node/lds-node-cache.git"
+  },
+  "keywords": [
+    "node",
+    "npm",
+    "module",
+    "js",
+    "javascript",
+    "cache"
+  ],
+  "author": "Daniel Sellers",
+  "license": "MIT"
+}
