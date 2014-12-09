@@ -1,5 +1,5 @@
 {
-  "name": "node-cache",
+  "name": "lds-node-cache",
   "version": "1.0.0",
   "description": "a super simple in server cache for things in node",
   "main": "index.js",
@@ -19,5 +19,10 @@
     "cache"
   ],
   "author": "Daniel Sellers",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "gulp": "^3.8.10",
+    "gulp-mocha": "^2.0.0"
+  }
 }
