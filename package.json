@@ -1,6 +1,6 @@
 {
   "name": "lds-node-cache",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "a super simple in server cache for things in node",
   "main": "index.js",
   "scripts": {
