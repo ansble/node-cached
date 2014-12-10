@@ -39,6 +39,10 @@ var cache = {}
         cache = {};
     }
 
+    , pruneCache = function (threshold) {
+        return clearCache(threshold);
+    }
+
     , removeFromCache = function (key) {
         if(typeof key === 'undefined'){
             throw new Error('key must be passed in');
@@ -70,4 +74,5 @@ module.exports = {
     , remove: removeFromCache
     , entries: cacheEntries
     , add: addToCache
+    , prune: pruneCache
 };

@@ -23,6 +23,10 @@ describe('lds-node-cache tests', function(){
         it('should have a entries function', function(){
             assert.isFunction(cache.entries);
         });
+
+        it('should have a prune function', function(){
+            assert.isFunction(cache.prune);
+        });
     });
 
     describe('should be able to add and retrieve items to/from the cache', function(){
@@ -94,7 +98,7 @@ describe('lds-node-cache tests', function(){
             cache.add('moroni', {prophet: true, hasPlates: true}, 100);
 
             assert.isObject(cache.get('moroni'));
-            
+
             cache.remove('moroni');
 
             assert.isNull(cache.get('moroni'));
