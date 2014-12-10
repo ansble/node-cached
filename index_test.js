@@ -11,13 +11,41 @@ describe('lds-node-cache tests', function(){
         it('should have an add function', function(){
             assert.isFunction(cache.add);
         });
+
+        it('should have a remove function', function(){
+            assert.isFunction(cache.remove);
+        });
+
+        it('should have a clear function', function(){
+            assert.isFunction(cache.clear);
+        });
+
+        it('should have a contains function', function(){
+            assert.isFunction(cache.contains);
+        });
     });
 
     describe('should be able to add and retrieve items to/from the cache', function(){
-        it('should retrieve items from the cache');
-        it('should add items to the cache');
-        it('should not return expired items from the cache');
+        it('should add items to the cache', function(){
+            cache.add('someKey', {item: 'I have not yet begun to fight'}, 5);
+
+            assert.isObject(cache.get('someKey'));
+        });
+
+        it('should retrieve items from the cache', function(){
+            assert.isObject(cache.get('someKey'));
+        });
+
+        it('should not return expired items from the cache', function(done){
+            setTimeout(function(){
+                assert.isNull(cache.get('someKey'));
+                done();
+            }, 10);            
+            
+        });
+
         it('should allow permenant caching of items');
+
         it('should remove expired items from the cache');
     });
 
