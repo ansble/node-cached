@@ -6,6 +6,7 @@ A super super simple in server cache for long running stuff. For instance if you
 ###get
 
 Usage:
+
 ```
 var cache = require('lds-node-cache')
     item = cache.get('http://some-rss-feed/feed.xml');
@@ -15,6 +16,7 @@ Returns null if the item is not in cache or is expired. Otherwise returns the ob
 ###add
 
 Usage:
+
 ```
 var cache = require('lds-node-cache');
 
@@ -31,6 +33,7 @@ Takes a key, data, and expires in milliseconds. Returns nothing.
 ###remove
 
 Usage:
+
 ```
 var cache = require('lds-node-cache');
 
@@ -42,6 +45,7 @@ Takes a key and removes the item from the cache if it is present. Requires a key
 ###entries
 
 Usage:
+
 ```
 var cache = require('lds-node-cache');
 
@@ -61,6 +65,7 @@ Uses is the number of times that the cached item has been accessed from the cach
 ###prune
 
 Usage:
+
 ```
 var cache = require('lds-node-cache');
 
@@ -76,6 +81,7 @@ Under the hood it is a convenience function on top of `cache.clear`.
 ###clear
 
 Usage:
+
 ```
 var cache = require('lds-node-cache');
 
