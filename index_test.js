@@ -20,8 +20,8 @@ describe('lds-node-cache tests', function(){
             assert.isFunction(cache.clear);
         });
 
-        it('should have a contains function', function(){
-            assert.isFunction(cache.contains);
+        it('should have a entries function', function(){
+            assert.isFunction(cache.entries);
         });
     });
 
@@ -50,13 +50,54 @@ describe('lds-node-cache tests', function(){
     });
 
     describe('should be able to find out what is in the cache now', function(){
-        it('should return an object of keys with time that the key expires');
+        it('should return an object of keys', function(){
+            cache.add('entriesTest', {}, 100);
+
+            assert.isObject(cache.entries().entriesTest);
+        });
+
+        it('the returned object should contain a use count', function(){
+            cache.add('entriesTest', {}, 100);
+
+            assert.isObject(cache.entries().entriesTest);
+            assert.isNumber(cache.entries().entriesTest.uses);
+        });
+
+        it('the returned object should contain an expires date object', function(){
+            cache.add('entriesTest', {}, 100);
+
+            assert.isObject(cache.entries().entriesTest);
+            assert.instanceOf(cache.entries().entriesTest.expires, Date);
+        });
     });
 
     describe('should allow items to be manually removed from the cache', function(){
-        it('should have a clear function');
-        it('should clear the entire cache with clear')
-        it('should have a remove function that takes a key');
-        it('should remove an item from cache by key');
+        it('should clear the entire cache with clear', function(){
+            cache.add('testData', {}, 300);
+            cache.add('moreTest', {}, 300);
+            cache.add('lotsATest', {}, 300);
+
+            cache.clear();
+
+            assert.isNull(cache.get('lotsATest'));
+        });
+
+        it('should have a remove function that takes a key', function(){
+            assert.throw(cache.remove, Error);
+        });
+
+        it('remove should return false if the key does not exist', function(){
+            assert.strictEqual(cache.remove('moroni'), false);
+        });
+
+        it('should remove an item from cache by key', function(){
+            cache.add('moroni', {prophet: true, hasPlates: true}, 100);
+
+            assert.isObject(cache.get('moroni'));
+            
+            cache.remove('moroni');
+
+            assert.isNull(cache.get('moroni'));
+        });
     });
 });

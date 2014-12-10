@@ -17,31 +17,37 @@ var cache = {}
 
     , getFromCache = function (key) {
         if(typeof cache[key] !== 'undefined' && !isExpired(key)){
+            cache[key].uses++;
+
             return cache[key].data;
         } else {
             return null;
         }
     }
 
-    , cacheContains = function () {
+    , cacheEntries = function () {
         var obj = {};
 
         Object.getOwnPropertyNames(cache).forEach(function(item){
-            obj[item] = cache[item].expires;
+            obj[item] = {expires: cache[item].expires, uses: cache[item].uses};
         });
 
         return obj;
     }
 
-    , clearCache = function () {
+    , clearCache = function (pruneThreshold) {
         cache = {};
     }
 
     , removeFromCache = function (key) {
-        try{
-            delete cache[key];
-        } catch (e) {
-            //an error...
+        if(typeof key === 'undefined'){
+            throw new Error('key must be passed in');
+        }
+
+        if(typeof cache[key] !== 'undefined'){
+            return delete cache[key];
+        }else {
+            return false;
         }
     }
 
@@ -49,6 +55,7 @@ var cache = {}
         cache[key] = {
             data: object
             , expires: new Date(new Date().getTime() + expires)
+            , uses: 1
         };
 
         //permenant cache option... pass in 0 as the expires period
@@ -61,6 +68,6 @@ module.exports = {
     get: getFromCache
     , clear: clearCache
     , remove: removeFromCache
-    , contains: cacheContains
+    , entries: cacheEntries
     , add: addToCache
 };
