@@ -28,7 +28,7 @@ var cache = {}
     , cacheEntries = function () {
         var obj = {};
 
-        Object.getOwnPropertyNames(cache).forEach(function(item){
+        Object.keys(cache).forEach(function(item){
             obj[item] = {expires: cache[item].expires, uses: cache[item].uses};
         });
 
@@ -36,7 +36,15 @@ var cache = {}
     }
 
     , clearCache = function (pruneThreshold) {
-        cache = {};
+        if(typeof pruneThreshold !== 'undefined'){
+            Object.keys(cache).forEach(function(item){
+                if(cache[item].uses <= pruneThreshold){
+                    delete cache[item];
+                }
+            });
+        }else{
+            cache = {};
+        }
     }
 
     , pruneCache = function (threshold) {
@@ -59,7 +67,7 @@ var cache = {}
         cache[key] = {
             data: object
             , expires: new Date(new Date().getTime() + expires)
-            , uses: 1
+            , uses: 0
         };
 
         //permenant cache option... pass in 0 as the expires period

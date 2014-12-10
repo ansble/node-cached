@@ -29,7 +29,7 @@ describe('lds-node-cache tests', function(){
         });
     });
 
-    describe('should be able to add and retrieve items to/from the cache', function(){
+    describe('should be able to add and remove items to/from the cache', function(){
         it('should add items to the cache', function(){
             cache.add('someKey', {item: 'I have not yet begun to fight'}, 5);
 
@@ -50,7 +50,55 @@ describe('lds-node-cache tests', function(){
 
         it('should allow permenant caching of items');
 
-        it('should remove expired items from the cache');
+        it('should remove expired items from the cache', function(done){
+            cache.add('someKey', {item: 'I have not yet begun to fight'}, 5);
+
+            setTimeout(function(){
+                assert.isNull(cache.get('someKey'));
+                assert.isUndefined(cache.entries().someKey);
+                done();
+            }, 10);
+        });
+
+        it('should remove all items below a certain use threshold from the cache with prune', function(){
+            cache.add('ether', {prophet: true}, 100);
+            cache.add('samuel', {prophet: true}, 100);
+            cache.add('jared', {prophet: true}, 100);
+            cache.add('joseph', {prophet: true}, 100);
+            
+            cache.get('ether');
+            cache.get('ether');
+            cache.get('joseph');
+            cache.get('joseph');
+            cache.get('jared');
+            cache.get('joseph');
+
+            cache.prune(2);
+
+            assert.isNull(cache.get('jared'), 'jared should be null');
+            assert.isNull(cache.get('ether'), 'ether should be null');
+            assert.isObject(cache.get('joseph'), 'jospeh should be an object');
+        });
+
+        it('should remove all items below a certain use threshold from the cache with clearCache and a param', function(){
+            cache.add('ether', {prophet: true}, 100);
+            cache.add('samuel', {prophet: true}, 100);
+            cache.add('jared', {prophet: true}, 100);
+            cache.add('joseph', {prophet: true}, 100);
+            
+            cache.get('ether');
+            cache.get('ether');
+            cache.get('joseph');
+            cache.get('joseph');
+            cache.get('jared');
+            cache.get('joseph');
+
+            cache.clear(2);
+
+            assert.isNull(cache.get('jared'), 'jared should be null');
+            assert.isNull(cache.get('ether'), 'ether should be null');
+            assert.isObject(cache.get('joseph'), 'jospeh should be an object');
+        });
     });
 
     describe('should be able to find out what is in the cache now', function(){
