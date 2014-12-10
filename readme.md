@@ -32,4 +32,6 @@ cache.add('http://some-rss-feed/feed.xml', {some: 'stuff'}, 600000);
 
 ###clear
 
+###prune
+
 Takes a key, data, and expires in milliseconds. Returns nothing.
