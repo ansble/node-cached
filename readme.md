@@ -19,7 +19,7 @@ Usage:
 var cache = require('lds-node-cache');
 
 //permenant cache
-cache.add('http://some-rss-feed/feed.xml', {some: 'stuff'}, 0);
+cache.add('http://some-rss-feed/feed.xml', {some: 'stuff'}, Infinity);
 
 //timed cache (10 minutes)
 cache.add('http://some-rss-feed/feed.xml', {some: 'stuff'}, 600000);

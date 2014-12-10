@@ -5,7 +5,13 @@
 var cache = {}
     , isExpired = function (key) {
         var currentTime = new Date()
-            , expired = !!(currentTime.getTime() >= cache[key].expires.getTime() || cache[key].expires === 0);
+            , expired;
+
+        if(cache[key].expires === Infinity){
+            expired = false;
+        } else {
+            expired = !!(currentTime.getTime() >= cache[key].expires.getTime() || cache[key].expires === 0);
+        }
 
         if(expired){
             //clear this item from cache
@@ -38,7 +44,7 @@ var cache = {}
     , clearCache = function (pruneThreshold) {
         if(typeof pruneThreshold !== 'undefined'){
             Object.keys(cache).forEach(function(item){
-                if(cache[item].uses <= pruneThreshold){
+                if(cache[item].uses <= pruneThreshold && cache[item].expires !== Infinity){
                     delete cache[item];
                 }
             });
@@ -66,13 +72,15 @@ var cache = {}
     , addToCache = function (key, object, expires) {
         cache[key] = {
             data: object
-            , expires: new Date(new Date().getTime() + expires)
+            , expires: 0
             , uses: 0
         };
 
         //permenant cache option... pass in 0 as the expires period
-        if(expires === 0){
-            cache[key].expires = 0;
+        if(expires === Infinity){
+            cache[key].expires = Infinity;
+        } else {
+             cache[key].expires = new Date(new Date().getTime() + expires);
         }
     };
 

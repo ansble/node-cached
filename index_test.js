@@ -48,7 +48,13 @@ describe('lds-node-cache tests', function(){
             
         });
 
-        it('should allow permenant caching of items');
+        it('should allow permenant caching of items', function(){
+            cache.add('infiniteKey', {item: 'I have not yet begun to fight'}, Infinity);
+
+            cache.prune(2);
+            assert.isObject(cache.entries().infiniteKey, 'should be there');
+            assert.isObject(cache.get('infiniteKey'));
+        });
 
         it('should remove expired items from the cache', function(done){
             cache.add('someKey', {item: 'I have not yet begun to fight'}, 5);
