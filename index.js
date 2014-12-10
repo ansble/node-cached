@@ -1,5 +1,3 @@
-//TODO: have the cache drop expired items on an interval of some sort
-//TODO: memory size?
 //TODO: jshint and editorconfig (add them yo)
 
 var cache = {}
