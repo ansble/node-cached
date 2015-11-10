@@ -1,6 +1,6 @@
 {
-  "name": "lds-node-cache",
-  "version": "2.0.2",
+  "name": "node-cached",
+  "version": "1.0.0",
   "description": "a super simple in server cache for things in node",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://code.ldschurch.org/stash/scm/node/lds-node-cache.git"
+    "url": " https://github.com/ansble/node-cached.git"
   },
   "keywords": [
     "node",
@@ -22,7 +22,9 @@
   "license": "MIT",
   "devDependencies": {
     "chai": "^1.10.0",
+    "eslint": "^1.9.0",
     "gulp": "^3.8.10",
+    "gulp-eslint": "^1.1.0",
     "gulp-mocha": "^2.0.0"
   }
 }

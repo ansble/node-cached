@@ -1,4 +1,4 @@
-#lds-node-cache
+#node-cached
 A super super simple in server cache for long running stuff. For instance if you are grabbing remote rss feeds and want to hold on to them for a few minutes instead of requesting them again everytime you need them.
 
 ##API
@@ -8,7 +8,7 @@ A super super simple in server cache for long running stuff. For instance if you
 Usage:
 
 ```
-var cache = require('lds-node-cache')
+var cache = require('node-cached')
     item = cache.get('http://some-rss-feed/feed.xml');
 ```
 Returns null if the item is not in cache or is expired. Otherwise returns the object.
@@ -18,7 +18,7 @@ Returns null if the item is not in cache or is expired. Otherwise returns the ob
 Usage:
 
 ```
-var cache = require('lds-node-cache');
+var cache = require('node-cached');
 
 //permenant cache
 cache.add('http://some-rss-feed/feed.xml', {some: 'stuff'}, Infinity);
@@ -35,7 +35,7 @@ Takes a key, data, and expires in milliseconds. Returns nothing.
 Usage:
 
 ```
-var cache = require('lds-node-cache');
+var cache = require('node-cached');
 
 cache.remove('http://some-rss-feed/feed.xml');
 ```
@@ -47,7 +47,7 @@ Takes a key and removes the item from the cache if it is present. Requires a key
 Usage:
 
 ```
-var cache = require('lds-node-cache');
+var cache = require('node-cached');
 
 var list = cache.entries();
 ```
@@ -67,7 +67,7 @@ Uses is the number of times that the cached item has been accessed from the cach
 Usage:
 
 ```
-var cache = require('lds-node-cache');
+var cache = require('node-cached');
 
 cache.prune(2);
 ```
@@ -83,7 +83,7 @@ Under the hood it is a convenience function on top of `cache.clear`.
 Usage:
 
 ```
-var cache = require('lds-node-cache');
+var cache = require('node-cached');
 
 //clear all
 cache.clear();

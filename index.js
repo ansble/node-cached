@@ -1,26 +1,31 @@
-//TODO: jshint and editorconfig (add them yo)
+'use strict';
 
-var cache = {}
-    , isExpired = function (key) {
-        var currentTime = new Date()
-            , expired;
+const cache = {}
+    , isDefined = (item) => {
+        return typeof item !== 'undefined';
+    }
 
-        if(cache[key].expires === Infinity){
+    , isExpired = (key) => {
+        const currentTime = new Date();
+
+        let expired;
+
+        if (cache[key].expires === Infinity){
             expired = false;
         } else {
             expired = !!(currentTime.getTime() >= cache[key].expires.getTime() || cache[key].expires === 0);
         }
 
-        if(expired){
-            //clear this item from cache
+        if (expired){
+            // clear this item from cache
             delete cache[key];
         }
 
         return expired;
     }
 
-    , getFromCache = function (key) {
-        if(typeof cache[key] !== 'undefined' && !isExpired(key)){
+    , getFromCache = (key) => {
+        if (isDefined(cache[key]) && !isExpired(key)) {
             cache[key].uses++;
 
             return cache[key].data;
@@ -29,56 +34,56 @@ var cache = {}
         }
     }
 
-    , cacheEntries = function () {
-        var obj = {};
+    , cacheEntries = () => {
+        const obj = {};
 
-        Object.keys(cache).forEach(function(item){
-            obj[item] = {expires: cache[item].expires, uses: cache[item].uses};
+        Object.keys(cache).forEach((item) => {
+            obj[item] = { expires: cache[item].expires, uses: cache[item].uses };
         });
 
         return obj;
     }
 
-    , clearCache = function (pruneThreshold) {
-        if(typeof pruneThreshold !== 'undefined'){
-            Object.keys(cache).forEach(function(item){
-                if(cache[item].uses <= pruneThreshold && cache[item].expires !== Infinity){
+    , clearCache = (pruneThreshold) => {
+        if (isDefined(pruneThreshold)) {
+            Object.keys(cache).forEach((item) => {
+                if (cache[item].uses <= pruneThreshold && cache[item].expires !== Infinity){
                     delete cache[item];
                 }
             });
-        }else{
+        } else {
             cache = {};
         }
     }
 
-    , pruneCache = function (threshold) {
+    , pruneCache = (threshold) => {
         return clearCache(threshold);
     }
 
-    , removeFromCache = function (key) {
-        if(typeof key === 'undefined'){
+    , removeFromCache = (key) => {
+        if (isDefined(key)) {
             throw new Error('key must be passed in');
         }
 
-        if(typeof cache[key] !== 'undefined'){
+        if (isDefined(cache[key])) {
             return delete cache[key];
-        }else {
+        } else {
             return false;
         }
     }
 
-    , addToCache = function (key, object, expires) {
+    , addToCache = (key, object, expires) => {
         cache[key] = {
             data: object
             , expires: 0
             , uses: 0
         };
 
-        //permenant cache option... pass in 0 as the expires period
-        if(expires === Infinity){
+        // permenant cache option... pass in 0 as the expires period
+        if (expires === Infinity){
             cache[key].expires = Infinity;
         } else {
-             cache[key].expires = new Date(new Date().getTime() + expires);
+            cache[key].expires = new Date(new Date().getTime() + expires);
         }
     };
 

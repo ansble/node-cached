@@ -58,5 +58,6 @@
     "trailing"      : true,   // Prohibit trailing whitespaces.
     "white"         : false,  // Check against strict whitespace and indentation rules.
     "indent"        : 4,       // Specify indentation spacing
-    "laxcomma"      : true
+    "laxcomma"      : true,
+    "predef"        : ["describe", "it"]
 }
