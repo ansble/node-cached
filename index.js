@@ -1,7 +1,7 @@
 'use strict';
+let cache = {};
 
-const cache = {}
-    , isDefined = (item) => {
+const isDefined = (item) => {
         return typeof item !== 'undefined';
     }
 
@@ -61,7 +61,7 @@ const cache = {}
     }
 
     , removeFromCache = (key) => {
-        if (isDefined(key)) {
+        if (!isDefined(key)) {
             throw new Error('key must be passed in');
         }
 

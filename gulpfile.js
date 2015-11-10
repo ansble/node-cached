@@ -4,7 +4,7 @@ const gulp = require('gulp')
     , mocha = require('gulp-mocha')
     , eslint = require('gulp-eslint');
 
-gulp.task('test', () => {
+gulp.task('test', [ 'lint' ], () => {
     gulp.src([ '*_test.js', '**/*_test.js', '!node_modules/**/*' ])
         .pipe(mocha({ reporter: 'spec' }));
 });

@@ -7,7 +7,7 @@ const assert = require('chai').assert
     , oneHundred = 100
     , threeHundred = 300;
 
-describe('lds-node-cache tests', () => {
+describe('node-cached tests', () => {
 
     describe('should be defined correctly', () => {
         it('should have a get function', () => {
