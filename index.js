@@ -72,7 +72,9 @@ const isDefined = (item) => {
         }
     }
 
-    , addToCache = (key, object, expires) => {
+    , addToCache = (key, object, expiresIn) => {
+        const expires = expiresIn || 300000;
+
         cache[key] = {
             data: object
             , expires: 0
