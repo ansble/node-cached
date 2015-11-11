@@ -79,7 +79,7 @@ const isDefined = (item) => {
             , uses: 0
         };
 
-        // permenant cache option... pass in 0 as the expires period
+        // permenant cache option... pass in Infinity as the expires period
         if (expires === Infinity){
             cache[key].expires = Infinity;
         } else {
